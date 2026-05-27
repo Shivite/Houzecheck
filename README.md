@@ -3,11 +3,11 @@
 ## Root
 ```
 root/
-└── my-react-app/
-    ├── client/
-    ├── server/
-    ├── .gitignore
-    └── README.md
+|
+├── client/
+├── server/
+├── .gitignore
+└── README.md
 ```
 
 ---
@@ -36,7 +36,26 @@ client/src/
 ### Structure
 ```
 server/
-└── server.js
+│
+├── server.js
+├── package.json
+├── .env
+│
+└── src/
+    │
+    ├── app.js
+    │
+    ├── data/
+    │   └── store.js
+    │
+    ├── routes/
+    │   └── rate.routes.js
+    │
+    ├── controllers/
+    │   └── rate.controller.js
+    │
+    └── services/
+        └── sse.service.js
 ```
 
 ### Responsibilities
@@ -52,7 +71,6 @@ server/
 ### Clone repo
 ```bash
 git clone git@github.com:Shivite/Houzecheck.git
-cd my-react-app
 ```
 
 ---
