@@ -3,11 +3,11 @@
 ## Root
 ```
 root/
-│
-├── client/                # React frontend
-├── server/                # Node + Express backend
-├── .gitignore
-└── README.md
+└── my-react-app/
+    ├── client/
+    ├── server/
+    ├── .gitignore
+    └── README.md
 ```
 
 ---
