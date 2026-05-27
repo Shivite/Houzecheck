@@ -1,98 +1,102 @@
-PROJECT STRUCTURE
+# 📁 Project Structure
+
+## Root
+```
 root/
 │
-├── client/                → React frontend
-│   ├── src/
-│   │   ├── pages/         → Main screens (Dashboard)
-│   │   ├── hooks/         → Custom hooks (useSSE)
-│   │   ├── App.tsx
-│   │   ├── index.css
-│   │   └── main.tsx
-│
-├── server/                → Node + Express backend
-│   ├── server.js
-│
-├── .gitignore             → Root ignore rules
-└── README.md              → Setup + flow + features
+├── client/                # React frontend
+├── server/                # Node + Express backend
+├── .gitignore
+└── README.md
+```
 
----------------------------------------------------
+---
 
-pages/
-Dashboard.tsx → Main UI (rating system + live dashboard)
-hooks/
-useSSE.ts → Handles real-time connection using EventSource
-App.tsx
-Entry point
-Controls start screen + routing logic
+## Frontend (client)
 
----------------------------------------------------
+### Structure
+```
+client/src/
+├── pages/        # Main screens (Dashboard)
+├── hooks/        # Custom hooks (useSSE)
+├── App.tsx       # App entry logic
+├── main.tsx      # React entry point
+└── index.css
+```
 
-CLIENT (Frontend)
+### Responsibilities
+- UI rendering (Dashboard, components)
+- Toast notifications (react-toastify)
+- SSE connection via `useSSE`
 
-Frontend only:
+---
 
-React code
-UI (Dashboard, components)
-Toast notifications (react-toastify)
-SSE connection (useSSE hook)
+## Backend (server)
 
----------------------------------------------------
+### Structure
+```
+server/
+└── server.js
+```
 
+### Responsibilities
+- REST API (`/rate`)
+- SSE endpoint (`/events`)
+- Score calculation
+- Broadcasting updates to clients
 
-SERVER (Backend)
+---
 
-Backend only:
+## How to Run
 
-Node + Express API
-REST endpoint /rate
-SSE endpoint /events
-Real-time score calculation
-Broadcasting updates to all clients
-
----------------------------------------------------
-
-HOW TO RUN PROJECT (AFTER CLONE)
+### Clone repo
+```bash
 git clone git@github.com:Shivite/Houzecheck.git
 cd my-react-app
+```
 
----------------------------------------------------
+---
 
-FRONTEND SETUP
+### Frontend
+```bash
 cd client
 npm install
-Create .env file inside client/
-REACT_APP_API_URL=http://localhost:5000
 npm start
+```
 
 Runs on: http://localhost:3000
 
+---
 
----------------------------------------------------
-
-BACKEND SETUP
+### Backend
+```bash
 cd server
 npm install
-Create .env file inside server/
-PORT=5000
-CLIENT_URL=http://localhost:3000
 npm start
+```
 
----------------------------------------------------
+Runs on: http://localhost:5000
 
+---
 
-WORKING FLOW
-Frontend (React - 3000)
+## Working Flow
+
+```
+Frontend (React :3000)
         ↓
-POST /rate (user rating / join)
+POST /rate
         ↓
-Backend (Node - 5000)
+Backend (Node :5000)
         ↓
-Updates score + average
+Update score + average
         ↓
-SSE broadcasts update
+SSE broadcast update
         ↓
-All connected clients get live updates instantly
+All clients receive live updates
+```
 
-Note: When new user join. A notification toast notificaiton will popup for all other users.
+---
 
+## Feature Note
 
+When a new user joins, a toast notification is broadcast to all connected users in real-time.
