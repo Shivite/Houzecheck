@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 export const useSSE = (userId: string) => {
   const [average, setAverage] = useState(0);
   const [totalScore, setTotalScore] = useState(0);
-  const [feed, setFeed] = useState<string[]>([]);
+  const [feed, setFeed] = useState<{ message: string; time?: string }[]>([]);
 
   useEffect(() => {
     const eventSource = new EventSource(
@@ -17,7 +17,10 @@ export const useSSE = (userId: string) => {
       setTotalScore(data.totalScore);
 
       if (data.message) {
-        setFeed((prev) => [data.message, ...prev].slice(0, 10));
+        setFeed((prev) => [
+          { message: data.message, time: data.time },
+          ...prev,
+        ].slice(0, 10));
       }
     };
 

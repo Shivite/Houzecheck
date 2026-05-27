@@ -18,8 +18,8 @@ const Dashboard = () => {
 
   const latest = feed[0];
 
-  if (latest.includes("joined the group")) {
-    toast.success(latest);
+  if (latest?.message?.includes("joined the group")) {
+    toast.success(`${latest.message} ${latest.time ?? ""}`);
   }
 }, [feed]);
 
@@ -112,7 +112,7 @@ const Dashboard = () => {
                     onClick={() => handleRating(n)}
                     className={`px-4 py-2 rounded ${
                       rating === n
-                        ? "bg-green-500 text-white"
+                        ? "bg-[#f7de8c]"
                         : "bg-gray-200"
                     }`}
                   >
@@ -180,14 +180,22 @@ const Dashboard = () => {
             Live Feed
           </h2>
 
-          <div className="space-y-2 max-h-64 overflow-y-auto">
+          <div className="space-y-2 max-h-64 overflow-y-auto pr-2">
 
             {feed.map((item, i) => (
               <p
                 key={i}
-                className="text-sm border-b py-1"
+                className="text-sm border-b py-2 px-2 rounded-md bg-gray-50 hover:bg-gray-100 transition flex justify-between items-center"
               >
-                {item}
+                <span className="font-medium text-gray-800 capitalize">
+                  {item.message}
+                </span>
+
+                {item.time && (
+                  <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">
+                    • {item.time}
+                  </span>
+                )}
               </p>
             ))}
 
